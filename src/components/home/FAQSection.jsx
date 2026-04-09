@@ -1,0 +1,83 @@
+import React, { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { ChevronDown } from 'lucide-react'
+
+const faqs = [
+  {
+    question: 'How does Trippn generate a trip plan?',
+    answer:
+      'It uses your destination, duration, budget, travel group, and interests to create a day-by-day plan with a more intentional flow.',
+  },
+  {
+    question: 'Can I use it for family trips or group travel?',
+    answer:
+      'Yes. The planner already considers traveler count and whether children are joining, so recommendations can lean more family-friendly when needed.',
+  },
+  {
+    question: 'Are the destination images exact matches?',
+    answer:
+      'Not always. The visuals are there to help users feel the destination mood and activity style, even when the exact place is not shown.',
+  },
+  {
+    question: 'Can I customize the result later?',
+    answer:
+      'That is the direction the app is heading. The result layout is already being shaped to support add-ons like maps, contacts, budgets, and deeper trip editing.',
+  },
+]
+
+const FAQSection = () => {
+  const [openItem, setOpenItem] = useState(0)
+
+  return (
+    <section className="rounded-[28px] border border-white/8 bg-[linear-gradient(180deg,#12151b_0%,#0b1017_100%)] p-6 shadow-[0_24px_70px_rgba(0,0,0,0.22)] sm:p-8 lg:p-10">
+      <div className="max-w-2xl">
+        <p className="text-xs uppercase tracking-[0.32em] text-orange-200/70">FAQs</p>
+        <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">
+          Questions users usually ask before they start
+        </h2>
+      </div>
+
+      <div className="mt-10 space-y-4">
+        {faqs.map((item, index) => {
+          const isOpen = openItem === index
+
+          return (
+            <div
+              key={item.question}
+              className="overflow-hidden rounded-[22px] border border-white/8 bg-white/[0.03]"
+            >
+              <button
+                type="button"
+                onClick={() => setOpenItem(isOpen ? -1 : index)}
+                className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left"
+              >
+                <span className="text-base font-medium text-white sm:text-lg">{item.question}</span>
+                <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.25 }}>
+                  <ChevronDown className="size-5 text-cyan-200" />
+                </motion.span>
+              </button>
+
+              <AnimatePresence initial={false}>
+                {isOpen ? (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.28, ease: 'easeOut' }}
+                    className="overflow-hidden"
+                  >
+                    <p className="px-5 pb-5 text-sm leading-7 text-white/62 sm:text-base">
+                      {item.answer}
+                    </p>
+                  </motion.div>
+                ) : null}
+              </AnimatePresence>
+            </div>
+          )
+        })}
+      </div>
+    </section>
+  )
+}
+
+export default FAQSection

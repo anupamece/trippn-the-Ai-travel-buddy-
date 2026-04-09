@@ -1,3 +1,5 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Anta&family=Bruno+Ace+SC&family=Saira+Stencil:ital,wght@0,100..900;1,100..900&display=swap');
 @import 'tailwindcss';
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -49,82 +51,125 @@
 }
 
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
+    color-scheme: dark;
+    --background: oklch(0.15 0.005 60);
+    --foreground: oklch(0.96 0.002 80);
+    --card: oklch(0.2 0.004 60 / 0.94);
+    --card-foreground: oklch(0.96 0.002 80);
+    --popover: oklch(0.18 0.004 60 / 0.98);
+    --popover-foreground: oklch(0.96 0.002 80);
+    --primary: oklch(0.72 0.16 48);
+    --primary-foreground: oklch(0.16 0.005 60);
+    --secondary: oklch(0.24 0.004 60);
+    --secondary-foreground: oklch(0.94 0.002 80);
+    --muted: oklch(0.22 0.003 60);
+    --muted-foreground: oklch(0.72 0.004 70);
+    --accent: oklch(0.72 0.16 48);
+    --accent-foreground: oklch(0.16 0.005 60);
+    --destructive: oklch(0.67 0.19 24);
+    --border: oklch(0.3 0.003 60 / 0.78);
+    --input: oklch(0.22 0.003 60 / 0.98);
+    --ring: oklch(0.72 0.16 48 / 0.4);
+    --chart-1: oklch(0.72 0.16 48);
+    --chart-2: oklch(0.82 0.1 75);
+    --chart-3: oklch(0.62 0.07 34);
+    --chart-4: oklch(0.55 0.05 60);
+    --chart-5: oklch(0.44 0.03 70);
+    --radius: 0.8rem;
+    --sidebar: oklch(0.18 0.004 60 / 0.98);
+    --sidebar-foreground: oklch(0.96 0.002 80);
+    --sidebar-primary: oklch(0.72 0.16 48);
+    --sidebar-primary-foreground: oklch(0.16 0.005 60);
+    --sidebar-accent: oklch(0.22 0.003 60);
+    --sidebar-accent-foreground: oklch(0.96 0.002 80);
+    --sidebar-border: oklch(0.3 0.003 60 / 0.78);
+    --sidebar-ring: oklch(0.72 0.16 48 / 0.4);
+    --bg-grid: hsla(0, 0%, 100%, 0.03);
 }
 
 .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
+    color-scheme: dark;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
     }
-  body {
-    @apply bg-background text-foreground;
-    }
   html {
     @apply font-sans;
+    min-height: 100%;
+    background-color: var(--background);
+    }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Geist', sans-serif;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    background: #111111;
+    }
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    }
+  body::before {
+    display: none;
+    }
+  body::after {
+    background-image:
+      linear-gradient(var(--bg-grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
+    background-size: 84px 84px;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent 92%);
+    opacity: 0.24;
+    }
+  ::selection {
+    background: color-mix(in srgb, var(--primary) 55%, white 10%);
+    color: var(--primary-foreground);
+    }
+}
+
+@layer components{
+    .max-padd-container{
+        @apply mx-auto max-w-475 px-4 lg:px-12;
+    }
+    .padd-container{
+        @apply mx-auto px-4 lg:px-12;
+    }
+    .flexCentre{
+        @apply flex items-center justify-center;
+    }
+    .flexStart{
+        @apply flex items-center justify-start;
+    }
+    .flexBetween{
+        @apply flex items-center justify-between;
+    }
+    .flexEnd{
+        @apply flex items-center justify-end;
+    }
+}
+
+@layer utilities{
+    h1{
+        @apply text-[36px] md:text-[44px] font-bold
+    }
+    h2{
+        @apply text-[32px] md:text-[36px] font-bold
+    }
+    h3{
+        @apply text-[22px] md:text-[26px] font-bold
+    }
+
+    h4{
+        @apply text-[18px] md:text-[20px] font-bold
+    }
+    p{
+        @apply text-[14px] leading-[1.6];
+        color: color-mix(in oklab, var(--foreground) 68%, transparent);
     }
 }
