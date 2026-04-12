@@ -29,7 +29,7 @@ const FAQSection = () => {
   const [openItem, setOpenItem] = useState(0)
 
   return (
-    <section className="rounded-[28px] border border-white/8 bg-[linear-gradient(180deg,#12151b_0%,#0b1017_100%)] p-6 shadow-[0_24px_70px_rgba(0,0,0,0.22)] sm:p-8 lg:p-10">
+    <section className="border-t border-white/8 bg-transparent px-2 py-10 sm:px-0 sm:py-12 lg:py-14">
       <div className="max-w-2xl">
         <p className="text-xs uppercase tracking-[0.32em] text-orange-200/70">FAQs</p>
         <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">

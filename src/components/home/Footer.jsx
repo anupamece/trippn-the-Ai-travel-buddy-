@@ -3,7 +3,7 @@ import { FaEnvelope, FaGlobe, FaInstagram, FaLinkedinIn, FaMapMarkerAlt } from '
 
 const Footer = () => {
   return (
-    <footer className="rounded-[28px] border border-white/8 bg-[linear-gradient(180deg,#11161f_0%,#090d13_100%)] p-6 shadow-[0_24px_70px_rgba(0,0,0,0.22)] sm:p-8 lg:p-10">
+    <footer className="border-t border-white/8 bg-transparent px-2 py-10 sm:px-0 sm:py-12 lg:py-14">
       <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/15 bg-cyan-300/8 px-4 py-2 text-sm text-cyan-100/82">
@@ -33,7 +33,12 @@ const Footer = () => {
             <a href="#faqs" className="block transition-colors hover:text-white">
               FAQs
             </a>
-            <a href="#contact" className="block transition-colors hover:text-white">
+            <a
+              href="https://personal-portfolio-opal-ten.vercel.app/"
+              target="_blank"
+              rel="noreferrer"
+              className="block transition-colors hover:text-white"
+            >
               Contact us
             </a>
           </div>

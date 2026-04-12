@@ -27,7 +27,7 @@ const features = [
 
 const AIFeaturesSection = () => {
   return (
-    <section className="rounded-[28px] border border-white/8 bg-[linear-gradient(140deg,#17120f_0%,#0e131c_55%,#0a1018_100%)] p-6 shadow-[0_24px_70px_rgba(0,0,0,0.22)] sm:p-8 lg:p-10">
+    <section className="border-t border-white/8 bg-transparent px-2 py-10 sm:px-0 sm:py-12 lg:py-14">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div className="max-w-2xl">
           <p className="text-xs uppercase tracking-[0.32em] text-orange-200/70">AI Features</p>

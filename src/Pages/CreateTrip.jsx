@@ -9,6 +9,26 @@ import GeneratingSpinner from '@/components/GeneratingSpinner'
 import LoginDialog from '../components/LoginDialog'
 import CommonLoader from '../components/CommonLoader'
 import Offers from '@/components/Offers'
+import ApiErrorMessage from '@/components/ApiErrorMessage'
+
+function getGeminiErrorMessage(error) {
+    const fallbackMessage = 'We could not generate your trip plan right now. Please try again in a moment.';
+    const message = error?.message || '';
+
+    if (!message) {
+        return fallbackMessage;
+    }
+
+    if (message.includes('VITE_GOOGLE_GEMINI_API_KEY')) {
+        return 'The Gemini API key is missing. Add `VITE_GOOGLE_GEMINI_API_KEY` to your `.env` file and try again.';
+    }
+
+    if (message.includes('Empty Gemini response') || message.includes('Could not find valid JSON')) {
+        return 'The AI returned an unreadable trip plan. Please try again so we can generate a cleaner response.';
+    }
+
+    return fallbackMessage;
+}
 
 const CreateTrip = () => {
     const navigate = useNavigate();
@@ -17,6 +37,7 @@ const CreateTrip = () => {
     const [openDialog, setOpenDialog] = useState(false);
     const [steps, setSteps] = useState(1);
     const [loading, setLoading] = useState(false);
+    const [apiError, setApiError] = useState('');
     const [tripData, setTripData] = useState({
         travelingFrom:null,
         travelingFromDetails:null,
@@ -48,6 +69,7 @@ const CreateTrip = () => {
             setOpenDialog(true);
             return;
         }
+        setApiError('');
         try {
             setLoading(true);
             const response = await generateTripPlan(tripData);
@@ -57,15 +79,22 @@ const CreateTrip = () => {
               .map((hotel) => hotel.name)
               .filter(Boolean);
 
-            const tripImages = await getTripImages(
-              tripData.destination,
-              hotelNames,
-              parsedTripPlan.dailyPlan || []
-            );
+            let tripImages = {
+              destinationCover: null,
+              restaurantImage: null,
+              hotelImages: [],
+              activityImages: [],
+            };
 
-            console.log('Gemini trip plan response:', response);
-            console.log('Parsed trip plan:', parsedTripPlan);
-            console.log('Pexels trip images:', tripImages);
+            try {
+              tripImages = await getTripImages(
+                tripData.destination,
+                hotelNames,
+                parsedTripPlan.dailyPlan || []
+              );
+            } catch (imageError) {
+              console.error('Failed to fetch trip images:', imageError);
+            }
 
             navigate('/trip-result', {
                 state: {
@@ -74,27 +103,28 @@ const CreateTrip = () => {
                 },
             });
         } catch (error) {
-            console.error('Failed to generate trip content:', error);
+            setApiError(getGeminiErrorMessage(error));
         } finally {
             setLoading(false);
         }
     }
     const handlePrevClick = () => {
         if (steps > 1) {
+            setApiError('');
             setSteps(steps - 1);
         }
     }
 
   return (
     preloader? <CommonLoader/>:
-    <div className='max-padd-container flex min-h-screen items-center justify-center py-10'>
+    <div className='flex min-h-screen items-center justify-center px-0 py-4 sm:px-4 sm:py-10'>
       {loading ? (
         <GeneratingSpinner />
       ) : (
-        <div className='grid w-full max-w-[82rem] gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(360px,0.85fr)] xl:items-start'>
+        <div className='grid w-full max-w-[82rem] gap-3 sm:gap-6 xl:grid-cols-[minmax(0,1.15fr)_minmax(360px,0.85fr)] xl:items-start'>
         <div className='w-full xl:min-w-0'>
         <div className='w-full min-h-[64vh] sm:min-h-[60vh]
-          bg-[#161616] shadow-[0_30px_120px_rgba(0,0,0,0.38)] rounded-[32px] border border-white/8 shadow-[0_20px_60px_rgba(0,0,0,0.28)]
+          rounded-none border-y border-white/8 bg-transparent shadow-none sm:rounded-[32px] sm:border sm:border-white/8 sm:bg-[#161616] sm:shadow-[0_20px_60px_rgba(0,0,0,0.28)]
           overflow-hidden flex flex-col'>
         {/* progress bar */}
             <div className='h-2 w-full bg-white/8'>
@@ -103,12 +133,12 @@ const CreateTrip = () => {
                 style={{width:`${(steps/3*100)}%`}}
                 />
             </div>
-            <div className='relative flex flex-1 flex-col overflow-hidden p-5 md:p-10'>
+            <div className='relative flex flex-1 flex-col overflow-hidden px-4 py-5 sm:p-6 md:p-10'>
                 <div
-                  className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-32"
+                  className="absolute inset-0 hidden bg-cover bg-center bg-no-repeat opacity-32 sm:block"
                   style={{ backgroundImage: "url('/card-bg.png')" }}
                 />
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(16,16,16,0.3)_0%,rgba(16,16,16,0.48)_34%,rgba(16,16,16,0.72)_100%)]" />
+                <div className="absolute inset-0 hidden bg-[linear-gradient(180deg,rgba(16,16,16,0.3)_0%,rgba(16,16,16,0.48)_34%,rgba(16,16,16,0.72)_100%)] sm:block" />
                 <div className="relative z-10 flex flex-1 flex-col">
                 {/* steps  */}
                 <div className='mb-8 flex items-center justify-center gap-2'>
@@ -124,12 +154,14 @@ const CreateTrip = () => {
                   </div>
                 </div>
 
+                {apiError ? <ApiErrorMessage message={apiError} /> : null}
+
                 {steps===1 && <StepOne tripData={tripData} setTripData={setTripData} />}
                 {steps===2 && <StepTwo tripData={tripData} setTripData={setTripData} />}
                 {steps===3 && <StepThree tripData={tripData} setTripData={setTripData} />}
                 </div>
             </div>
-            <div className='flex items-center justify-between border-t border-white/8 bg-[#141414] px-5 py-4 md:px-8'>
+            <div className='flex items-center justify-between border-t border-white/8 bg-transparent px-4 py-4 sm:bg-[#141414] sm:px-5 md:px-8'>
                 <Button
                 variant="outline"
                 size="lg"

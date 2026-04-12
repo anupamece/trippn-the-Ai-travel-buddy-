@@ -34,7 +34,7 @@ const PopularDestinationsSection = () => {
   }, [])
 
   return (
-    <section className="rounded-[28px] border border-white/8 bg-[linear-gradient(180deg,#101721_0%,#0a1018_100%)] p-6 shadow-[0_24px_70px_rgba(0,0,0,0.22)] sm:p-8 lg:p-10">
+    <section className="border-t border-white/8 bg-transparent px-2 py-10 sm:px-0 sm:py-12 lg:py-14">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div className="max-w-2xl">
           <p className="text-xs uppercase tracking-[0.32em] text-cyan-200/70">

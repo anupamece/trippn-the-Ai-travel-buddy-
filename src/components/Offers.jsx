@@ -45,8 +45,8 @@ const Offers = () => {
   }, [])
 
   return (
-    <aside className="overflow-hidden rounded-[32px] border border-white/8 bg-[linear-gradient(180deg,#161616_0%,#0f0f0f_100%)] shadow-[0_26px_90px_rgba(0,0,0,0.26)]">
-      <div className="relative overflow-hidden border-b border-white/8 px-6 pb-6 pt-7 sm:px-7">
+    <aside className="overflow-hidden rounded-[24px] border border-white/8 bg-[linear-gradient(180deg,#161616_0%,#0f0f0f_100%)] shadow-[0_20px_60px_rgba(0,0,0,0.22)] sm:rounded-[32px] sm:shadow-[0_26px_90px_rgba(0,0,0,0.26)]">
+      <div className="relative overflow-hidden border-b border-white/8 px-4 pb-5 pt-5 sm:px-7 sm:pb-6 sm:pt-7">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-18"
           style={{ backgroundImage: "url('/card-bg.png')" }}
@@ -67,7 +67,7 @@ const Offers = () => {
         </div>
       </div>
 
-      <div className="p-5 sm:p-6">
+      <div className="p-4 sm:p-6">
         {loading ? (
           <div className="flex min-h-[320px] items-center justify-center rounded-[24px] border border-white/8 bg-white/[0.03] text-white/72">
             <div className="inline-flex items-center gap-3">
@@ -76,7 +76,7 @@ const Offers = () => {
             </div>
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {items.map((item) => (
               <article
                 key={item.name}
