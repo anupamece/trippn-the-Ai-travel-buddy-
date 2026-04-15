@@ -35,7 +35,7 @@ const toggleSelection = (currentItems, item) =>
 
 const StepOne = ({ tripData, setTripData }) => {
   return (
-    <div className="mx-auto w-full max-w-2xl text-white">
+    <div className="mx-auto w-full max-w-2xl text-white" >
       <div className="mb-8 space-y-4">
         <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-sm text-cyan-100/90">
           <Compass className="size-4 text-cyan-300" />
