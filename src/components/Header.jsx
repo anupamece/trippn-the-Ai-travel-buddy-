@@ -1,37 +1,25 @@
 
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { LogOut, MapPinned, Plus, User } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
+import { LogOut, MapPinned, Plus, User, Compass } from 'lucide-react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useAuth } from '@/context/AuthContext'
 import LoginDialog from './LoginDialog'
 import LogoutDialog from './LogOutDialog'
 
 const Header = () => {
+  const { user, logout } = useAuth()
   const [openLoginDialog, setOpenLoginDialog] = useState(false)
   const [openLogoutDialog, setOpenLogoutDialog] = useState(false)
-  const [user, setUser] = useState(null)
 
-  useEffect(() => {
-    const syncUser = () => {
-      const storedUser = localStorage.getItem('user')
-      setUser(storedUser ? JSON.parse(storedUser) : null)
+  async function handleLogout() {
+    try {
+      await logout()
+      setOpenLogoutDialog(false)
+    } catch (err) {
+      console.error('Logout failed:', err)
     }
-
-    syncUser()
-    window.addEventListener('storage', syncUser)
-    window.addEventListener('auth-changed', syncUser)
-
-    return () => {
-      window.removeEventListener('storage', syncUser)
-      window.removeEventListener('auth-changed', syncUser)
-    }
-  }, [])
-
-  function handleLogout() {
-    localStorage.removeItem('user')
-    setUser(null)
-    window.dispatchEvent(new Event('auth-changed'))
   }
 
   return (
@@ -59,6 +47,16 @@ const Header = () => {
         </Link>
 
         <div className="flex items-center gap-2">
+          {user && (
+            <Link
+              to="/my-trips"
+              className="inline-flex h-8 items-center justify-center gap-1.5 rounded-[18px] border border-white/10 bg-white/[0.04] px-3 text-sm font-medium text-white/85 transition-all duration-300 hover:border-orange-400/30 hover:bg-white/[0.08]"
+            >
+              <Compass className="size-4 text-orange-400" />
+              <span>My Trips</span>
+            </Link>
+          )}
+
           <Link
             to="/create-trip"
             className="inline-flex h-8 items-center justify-center gap-1.5 rounded-[18px] border border-orange-400/25 bg-orange-500 px-2.5 text-sm font-medium whitespace-nowrap text-white shadow-[0_10px_26px_rgba(255,132,53,0.24)] transition-all duration-300 hover:scale-101 hover:border-orange-300/40 hover:bg-orange-400 hover:shadow-[0_16px_34px_rgba(255,132,53,0.32)] active:translate-y-0"
@@ -71,14 +69,14 @@ const Header = () => {
             <div className="flex items-center gap-2">
               <div className="hidden rounded-[18px] border border-white/12 bg-white/6 px-3 py-2 text-sm text-white/85 sm:flex sm:items-center sm:gap-2">
                 <User className="size-4 text-orange-400" />
-                <span className="max-w-28 truncate">{user.name}</span>
+                <span className="max-w-28 truncate">{user.displayName || user.email || 'Traveler'}</span>
               </div>
               <button
                 type="button"
                 onClick={() => setOpenLogoutDialog(true)}
                 className={cn(
                   buttonVariants({ variant: 'outline', size: 'default' }),
-                  'rounded-[18px] border-white/10 bg-white/[0.03] text-white transition-all duration-300 hover:border-orange-400/30 hover:bg-white/[0.06]'
+                  'rounded-[18px] border-white/10 bg-white/[0.03] text-white transition-all duration-300 hover:border-orange-400/30 hover:bg-white/[0.06] cursor-pointer'
                 )}
               >
                 <LogOut className="size-4" />
@@ -91,7 +89,7 @@ const Header = () => {
               onClick={() => setOpenLoginDialog(true)}
               className={cn(
                 buttonVariants({ variant: 'outline', size: 'default' }),
-                'rounded-[18px] border-white/10 bg-white/[0.03] text-white transition-all duration-300 hover:border-orange-400/30 hover:bg-white/[0.06]'
+                'rounded-[18px] border-white/10 bg-white/[0.03] text-white transition-all duration-300 hover:border-orange-400/30 hover:bg-white/[0.06] cursor-pointer'
               )}
             >
               <User className="size-4" />
@@ -105,19 +103,16 @@ const Header = () => {
       <LoginDialog
         open={openLoginDialog}
         onOpenChange={setOpenLoginDialog}
-        onLogin={(nextUser) => setUser(nextUser)}
       />
 
       <LogoutDialog
         open={openLogoutDialog}
         onOpenChange={setOpenLogoutDialog}
-        onConfirm={() => {
-          handleLogout()
-          setOpenLogoutDialog(false)
-        }}
+        onConfirm={handleLogout}
       />
     </>
   )
 }
 
 export default Header
+

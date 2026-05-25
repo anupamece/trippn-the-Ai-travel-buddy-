@@ -34,7 +34,6 @@ const CreateTrip = () => {
     const navigate = useNavigate();
     const [preloader, setPreloader] = useState(true);
 
-    const [openDialog, setOpenDialog] = useState(false);
     const [steps, setSteps] = useState(1);
     const [loading, setLoading] = useState(false);
     const [apiError, setApiError] = useState('');
@@ -64,11 +63,6 @@ const CreateTrip = () => {
             return;
         }
         
-        const user=localStorage.getItem('user')//this will only excecute when step===3 
-        if(!user){
-            setOpenDialog(true);
-            return;
-        }
         setApiError('');
         try {
             setLoading(true);
@@ -100,6 +94,7 @@ const CreateTrip = () => {
                 state: {
                     tripPlan: parsedTripPlan,
                     tripImages,
+                    tripData,
                 },
             });
         } catch (error) {
@@ -187,14 +182,7 @@ const CreateTrip = () => {
           <Offers />
         </div>
         </div>
-      )}
-
-      <LoginDialog
-        open={openDialog}
-        onOpenChange={setOpenDialog}
-        onLogin={() => setOpenDialog(false)}
-      />
-    </div>
+      )}    </div>
   )
 }
 

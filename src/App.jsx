@@ -4,6 +4,7 @@ import { Route,Routes } from 'react-router-dom'
 import Home from './Pages/Home'
 import CreateTrip from './Pages/CreateTrip'
 import TripResult from './Pages/TripResult'
+import MyTrips from './Pages/MyTrips'
 import CommonLoader from './components/CommonLoader'
 import GeneratingSpinner from './components/GeneratingSpinner'
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
            <Route path={'/'} element={<Home/>} />
            <Route path={'/create-trip'} element={<CreateTrip/>} />
            <Route path={'/trip-result'} element={<TripResult/>} />
+           <Route path={'/my-trips'} element={<MyTrips/>} />
        </Routes>
      </main>
     
