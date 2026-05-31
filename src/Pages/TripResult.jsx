@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Clock3, Compass, MapPinned, Bookmark, Share2, Check, Loader2, AlertTriangle } from 'lucide-react'
+import { Clock3, Compass, MapPinned, Bookmark, Share2, Check, Loader2, AlertTriangle, ArrowLeft } from 'lucide-react'
 import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import { useAuth } from '@/context/AuthContext'
 import { db } from '@/Services/firebase'
@@ -201,7 +201,17 @@ const TripResult = () => {
   const isSaved = !!savedId || !!tripId
 
   return (
-    <section className="mx-auto flex w-full max-w-7xl flex-col gap-8 text-white relative">
+    <section className="mx-auto flex w-full max-w-7xl flex-col gap-6 text-white relative px-4 pt-24 sm:pt-28 pb-16">
+      {/* Back to Home Button */}
+      <div className="flex justify-start w-full">
+        <Link 
+          to="/" 
+          className="inline-flex h-9 items-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-4 text-xs font-semibold uppercase tracking-wider text-white transition-all duration-300 hover:border-indigo-500/40 hover:bg-indigo-500/10 cursor-pointer"
+        >
+          <ArrowLeft className="size-4 text-indigo-400" />
+          <span>Back to Home</span>
+        </Link>
+      </div>
       <div className="relative overflow-hidden rounded-[30px] border border-white/8 bg-[#07111f] shadow-[0_26px_90px_rgba(0,0,0,0.28)]">
         {tripImages?.destinationCover?.imageUrl ? (
           <img
@@ -218,8 +228,8 @@ const TripResult = () => {
 
         <div className="absolute inset-x-0 bottom-0 p-5 sm:p-8 lg:p-10">
           <div className="max-w-4xl">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/12 bg-[#09111e]/55 px-4 py-2 text-sm text-white/88 shadow-[0_12px_32px_rgba(0,0,0,0.22)] backdrop-blur-xl">
-              <MapPinned className="size-4 text-orange-300" />
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/12 bg-[#09111e]/55 px-4 py-2 text-xs font-bold uppercase tracking-wider text-white/88 shadow-[0_12px_32px_rgba(0,0,0,0.22)] backdrop-blur-xl">
+              <MapPinned className="size-4 text-amber-400" />
               Tailored itinerary preview
             </div>
 
@@ -250,14 +260,14 @@ const TripResult = () => {
                   <>
                     <button
                       disabled
-                      className="inline-flex h-11 items-center gap-2 rounded-2xl border border-emerald-500/25 bg-emerald-500/10 px-5 text-sm font-medium text-emerald-300 backdrop-blur-md"
+                      className="inline-flex h-11 items-center gap-2 rounded-2xl border border-emerald-500/25 bg-emerald-500/10 px-5 text-xs font-bold uppercase tracking-wider text-emerald-300 backdrop-blur-md"
                     >
                       <Check className="size-4" />
                       <span>Saved to Trips</span>
                     </button>
                     <button
                       onClick={handleShareTrip}
-                      className="inline-flex h-11 items-center gap-2 rounded-2xl border border-orange-400/20 bg-orange-500 px-5 text-sm font-medium text-white shadow-[0_10px_24px_rgba(255,132,53,0.22)] transition-all duration-300 hover:bg-orange-400 hover:shadow-[0_14px_30px_rgba(255,132,53,0.3)] cursor-pointer active:translate-y-0.5"
+                      className="inline-flex h-11 items-center gap-2 rounded-2xl border border-amber-500/25 bg-gradient-to-r from-amber-500 to-orange-500 px-5 text-xs font-bold uppercase tracking-wider text-white shadow-[0_6px_20px_rgba(245,158,11,0.25)] transition-all duration-300 hover:from-amber-400 hover:to-orange-400 hover:shadow-[0_8px_25px_rgba(245,158,11,0.35)] cursor-pointer active:translate-y-0.5"
                     >
                       {shared ? <Check className="size-4" /> : <Share2 className="size-4" />}
                       <span>{shared ? 'Link Copied!' : 'Share Itinerary'}</span>
@@ -267,7 +277,7 @@ const TripResult = () => {
                   <button
                     onClick={handleSaveTrip}
                     disabled={saving}
-                    className="inline-flex h-11 items-center gap-2 rounded-2xl border border-orange-400/20 bg-orange-500 px-5 text-sm font-medium text-white shadow-[0_10px_24px_rgba(255,132,53,0.22)] transition-all duration-300 hover:bg-orange-400 hover:shadow-[0_14px_30px_rgba(255,132,53,0.3)] cursor-pointer active:translate-y-0.5"
+                    className="inline-flex h-11 items-center gap-2 rounded-2xl border border-amber-500/25 bg-gradient-to-r from-amber-500 to-orange-500 px-5 text-xs font-bold uppercase tracking-wider text-white shadow-[0_6px_20px_rgba(245,158,11,0.25)] transition-all duration-300 hover:from-amber-400 hover:to-orange-400 hover:shadow-[0_8px_25px_rgba(245,158,11,0.35)] cursor-pointer active:translate-y-0.5"
                   >
                     {saving ? <Loader2 className="size-4 animate-spin" /> : <Bookmark className="size-4" />}
                     <span>{saving ? 'Saving...' : 'Save to My Trips'}</span>

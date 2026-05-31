@@ -2,7 +2,7 @@ import { LoaderCircle, MapPinned, Search, X } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 
 const baseInputClassName =
-  'mt-3 h-14 w-full rounded-2xl border border-white/10 bg-white/6 px-4 pr-12 text-base text-white outline-none transition-all duration-300 placeholder:text-white/35 focus:border-cyan-300/40 focus:bg-white/8 focus:ring-4 focus:ring-cyan-300/10'
+  'mt-3 h-14 w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 pr-12 text-base text-white outline-none transition-all duration-300 placeholder:text-white/35 focus:border-indigo-500/50 focus:bg-white/[0.06] focus:ring-4 focus:ring-indigo-500/10'
 
 const GeoapifyAutocomplete = ({
   value,
@@ -150,7 +150,7 @@ const GeoapifyAutocomplete = ({
         ) : (
           <div className="pointer-events-none absolute inset-y-0 right-4 flex items-center">
             {isLoading ? (
-              <LoaderCircle className="size-4 animate-spin text-cyan-300" />
+              <LoaderCircle className="size-4 animate-spin text-indigo-400" />
             ) : (
               <Search className="size-4 text-white/40" />
             )}
@@ -161,7 +161,7 @@ const GeoapifyAutocomplete = ({
       {error ? <p className="mt-2 text-sm text-amber-200/85">{error}</p> : null}
 
       {isOpen && suggestions.length > 0 ? (
-        <div className="absolute z-20 mt-3 w-full overflow-hidden rounded-2xl border border-white/10 bg-slate-950/95 shadow-[0_20px_45px_rgba(0,0,0,0.28)] backdrop-blur-xl">
+        <div className="absolute z-20 mt-3 w-full overflow-hidden rounded-2xl border border-white/10 bg-[#0a0f18]/95 shadow-[0_20px_45px_rgba(0,0,0,0.4)] backdrop-blur-xl">
           {suggestions.map((item) => {
             const key = item.place_id ?? `${item.lat}-${item.lon}-${item.formatted}`
             return (
@@ -169,9 +169,9 @@ const GeoapifyAutocomplete = ({
                 key={key}
                 type="button"
                 onClick={() => handleSelect(item)}
-                className="flex w-full items-start gap-3 border-b border-white/6 px-4 py-3 text-left text-white transition-colors last:border-b-0 hover:bg-white/6"
+                className="flex w-full items-start gap-3 border-b border-white/6 px-4 py-3 text-left text-white transition-colors last:border-b-0 hover:bg-white/6 cursor-pointer"
               >
-                <span className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-xl bg-cyan-300/10 text-cyan-200">
+                <span className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-400">
                   <MapPinned className="size-4" />
                 </span>
                 <span className="min-w-0">

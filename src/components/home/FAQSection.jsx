@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, HelpCircle } from 'lucide-react'
 
 const faqs = [
   {
@@ -29,10 +29,13 @@ const FAQSection = () => {
   const [openItem, setOpenItem] = useState(0)
 
   return (
-    <section className="border-t border-white/8 bg-transparent px-2 py-10 sm:px-0 sm:py-12 lg:py-14">
+    <section className="bg-transparent px-2 py-10 sm:px-0 sm:py-12 lg:py-14">
       <div className="max-w-2xl">
-        <p className="text-xs uppercase tracking-[0.32em] text-orange-200/70">FAQs</p>
-        <h2 className="mt-4 text-3xl font-semibold text-white sm:text-4xl">
+        <div className="inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.22em] text-indigo-300 shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-md mb-2">
+          <HelpCircle className="size-3.5 text-indigo-400" />
+          <span>FAQs</span>
+        </div>
+        <h2 className="mt-4 font-heading text-3xl font-bold text-white sm:text-4xl">
           Questions users usually ask before they start
         </h2>
       </div>
@@ -44,16 +47,16 @@ const FAQSection = () => {
           return (
             <div
               key={item.question}
-              className="overflow-hidden rounded-[22px] border border-white/8 bg-white/[0.03]"
+              className="overflow-hidden rounded-[22px] border border-white/8 bg-white/[0.02]"
             >
               <button
                 type="button"
                 onClick={() => setOpenItem(isOpen ? -1 : index)}
-                className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left"
+                className="flex w-full items-center justify-between gap-4 px-5 py-5 text-left cursor-pointer"
               >
                 <span className="text-base font-medium text-white sm:text-lg">{item.question}</span>
                 <motion.span animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.25 }}>
-                  <ChevronDown className="size-5 text-cyan-200" />
+                  <ChevronDown className="size-5 text-indigo-400" />
                 </motion.span>
               </button>
 

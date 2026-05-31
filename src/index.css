@@ -1,15 +1,15 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Anta&family=Bruno+Ace+SC&family=Saira+Stencil:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@700,900&display=swap');
 @import 'tailwindcss';
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-    --font-heading: var(--font-sans);
-    --font-sans: 'Geist Variable', sans-serif;
+    --font-heading: 'Outfit', sans-serif;
+    --font-sans: 'Plus Jakarta Sans', sans-serif;
+    --font-satoshi: 'Satoshi', sans-serif;
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -52,39 +52,39 @@
 
 :root {
     color-scheme: dark;
-    --background: oklch(0.15 0.005 60);
-    --foreground: oklch(0.96 0.002 80);
-    --card: oklch(0.2 0.004 60 / 0.94);
-    --card-foreground: oklch(0.96 0.002 80);
-    --popover: oklch(0.18 0.004 60 / 0.98);
-    --popover-foreground: oklch(0.96 0.002 80);
-    --primary: oklch(0.72 0.16 48);
-    --primary-foreground: oklch(0.16 0.005 60);
-    --secondary: oklch(0.24 0.004 60);
-    --secondary-foreground: oklch(0.94 0.002 80);
-    --muted: oklch(0.22 0.003 60);
-    --muted-foreground: oklch(0.72 0.004 70);
-    --accent: oklch(0.72 0.16 48);
-    --accent-foreground: oklch(0.16 0.005 60);
-    --destructive: oklch(0.67 0.19 24);
-    --border: oklch(0.3 0.003 60 / 0.78);
-    --input: oklch(0.22 0.003 60 / 0.98);
-    --ring: oklch(0.72 0.16 48 / 0.4);
-    --chart-1: oklch(0.72 0.16 48);
-    --chart-2: oklch(0.82 0.1 75);
+    --background: oklch(0.06 0.01 240);
+    --foreground: oklch(0.98 0.005 240);
+    --card: oklch(0.09 0.015 240 / 0.76);
+    --card-foreground: oklch(0.98 0.005 240);
+    --popover: oklch(0.08 0.015 240 / 0.98);
+    --popover-foreground: oklch(0.98 0.005 240);
+    --primary: oklch(0.58 0.23 268);
+    --primary-foreground: oklch(0.99 0.002 240);
+    --secondary: oklch(0.14 0.02 240);
+    --secondary-foreground: oklch(0.92 0.01 240);
+    --muted: oklch(0.14 0.015 240);
+    --muted-foreground: oklch(0.66 0.02 240);
+    --accent: oklch(0.75 0.17 65);
+    --accent-foreground: oklch(0.09 0.015 240);
+    --destructive: oklch(0.54 0.22 26);
+    --border: oklch(0.15 0.02 240 / 0.65);
+    --input: oklch(0.11 0.015 240 / 0.9);
+    --ring: oklch(0.58 0.23 268 / 0.35);
+    --chart-1: oklch(0.58 0.23 268);
+    --chart-2: oklch(0.75 0.17 65);
     --chart-3: oklch(0.62 0.07 34);
     --chart-4: oklch(0.55 0.05 60);
     --chart-5: oklch(0.44 0.03 70);
-    --radius: 0.8rem;
-    --sidebar: oklch(0.18 0.004 60 / 0.98);
-    --sidebar-foreground: oklch(0.96 0.002 80);
-    --sidebar-primary: oklch(0.72 0.16 48);
-    --sidebar-primary-foreground: oklch(0.16 0.005 60);
-    --sidebar-accent: oklch(0.22 0.003 60);
-    --sidebar-accent-foreground: oklch(0.96 0.002 80);
-    --sidebar-border: oklch(0.3 0.003 60 / 0.78);
-    --sidebar-ring: oklch(0.72 0.16 48 / 0.4);
-    --bg-grid: hsla(0, 0%, 100%, 0.03);
+    --radius: 0.85rem;
+    --sidebar: oklch(0.09 0.015 240 / 0.98);
+    --sidebar-foreground: oklch(0.98 0.005 240);
+    --sidebar-primary: oklch(0.58 0.23 268);
+    --sidebar-primary-foreground: oklch(0.99 0.002 240);
+    --sidebar-accent: oklch(0.14 0.02 240);
+    --sidebar-accent-foreground: oklch(0.98 0.005 240);
+    --sidebar-border: oklch(0.15 0.02 240 / 0.65);
+    --sidebar-ring: oklch(0.58 0.23 268 / 0.35);
+    --bg-grid: hsla(240, 25%, 98%, 0.015);
 }
 
 .dark {
@@ -94,20 +94,20 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    }
+  }
   html {
     @apply font-sans;
     min-height: 100%;
     background-color: var(--background);
-    }
+  }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Geist', sans-serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
-    background: #111111;
-    }
+    background: var(--background);
+  }
   body::before,
   body::after {
     content: "";
@@ -115,22 +115,22 @@
     inset: 0;
     pointer-events: none;
     z-index: -1;
-    }
+  }
   body::before {
     display: none;
-    }
+  }
   body::after {
     background-image:
       linear-gradient(var(--bg-grid) 1px, transparent 1px),
       linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
-    background-size: 84px 84px;
-    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent 92%);
-    opacity: 0.24;
-    }
+    background-size: 72px 72px;
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.45), transparent 88%);
+    opacity: 0.85;
+  }
   ::selection {
     background: color-mix(in srgb, var(--primary) 55%, white 10%);
     color: var(--primary-foreground);
-    }
+  }
 }
 
 @layer components{

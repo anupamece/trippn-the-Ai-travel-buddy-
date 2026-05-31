@@ -1,27 +1,28 @@
 import Hero from '@/components/Hero'
 import AIFeaturesSection from '@/components/home/AIFeaturesSection'
 import FAQSection from '@/components/home/FAQSection'
-import Footer from '@/components/home/Footer'
 import HowItWorksSection from '@/components/home/HowItWorksSection'
 import PopularDestinationsSection from '@/components/home/PopularDestinationsSection'
 import React from 'react'
 
 const Home = () => {
   return (
-    <div className="space-y-8">
+    <div className="w-full flex flex-col gap-10 sm:gap-14 lg:gap-18">
       <Hero />
-      <PopularDestinationsSection />
+      
+      <div className="mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8 flex flex-col gap-10 sm:gap-14 lg:gap-18">
+        <PopularDestinationsSection />
 
-      <div id="ai-features">
-        <AIFeaturesSection />
+        <div id="ai-features">
+          <AIFeaturesSection />
+        </div>
+        <div id="how-it-works">
+          <HowItWorksSection />
+        </div>
+        <div id="faqs">
+          <FAQSection />
+        </div>
       </div>
-      <div id="how-it-works">
-        <HowItWorksSection />
-      </div>
-      <div id="faqs">
-        <FAQSection />
-      </div>
-      <Footer />
     </div>
   )
 }
